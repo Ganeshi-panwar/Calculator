@@ -50,51 +50,68 @@ class MainActivity : AppCompatActivity() {
         var buClickValue:String = entryData.text.toString()
         when(buSelect.id){
             R.id.buMulti -> {
+                buClickValue += "X"
                 op = "*"
 
             }
+
             R.id.buAdd -> {
+                buClickValue += "+"
                 op = "+"
+
 
 
             }
             R.id.buDiv ->{
+                buClickValue += "/"
                 op = "/"
+
 
             }
             R.id.buMinus ->{
+                buClickValue += "-"
                 op = "-"
 
+
             }
 
 
         }
+            entryData.setText(buClickValue)
         oldNumber= entryData.text.toString()
-        isNewOp=true
+       // isNewOp=true
     }
-    fun buEqaulEvent(view:View){
+    fun buEqaulEvent(view:View) {
         val entryData = findViewById<EditText>(R.id.etShowNumber)
         var newNumber = entryData.text.toString()
-        var findNumber:Double?=null
-        when(op){
-            "*" ->{
-                findNumber = oldNumber.toDouble() *newNumber.toDouble()
-            }
-            "/" ->{
-                findNumber = oldNumber.toDouble() /newNumber.toDouble()
-            }
-            "+" ->{
-                findNumber = oldNumber.toDouble() +newNumber.toDouble()
-            }
-            "-" ->{
-                findNumber = oldNumber.toDouble() -newNumber.toDouble()
-            }
+        var findNumber: Double? = null
+       // if (!oldNumber.isEmpty() && !newNumber.isEmpty()) {
+            when (op) {
+                "*" -> {
+                    findNumber = oldNumber.toDouble() * newNumber.toDouble()
+                }
 
-        }
-        entryData.setText(findNumber.toString())
-        isNewOp = true
+                "/" -> {
+                    findNumber = oldNumber.toDouble() / newNumber.toDouble()
+                }
 
+                "+" -> {
+                    findNumber = oldNumber.toDouble() + newNumber.toDouble()
+                }
+
+                "-" -> {
+                    findNumber = oldNumber.toDouble() - newNumber.toDouble()
+                }
+
+            }
+            entryData.setText(findNumber.toString())
+            isNewOp = true
+
+//        }else{
+//            println("empty value ")
+//        }
     }
+
     fun buClearEvent(view:View){
         var entryData = findViewById<EditText>(R.id.etShowNumber)
         entryData.setText("0")
