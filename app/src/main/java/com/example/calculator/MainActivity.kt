@@ -13,8 +13,14 @@ class MainActivity : AppCompatActivity() {
     }
     fun buNumberClick(view: View) {
         val entryData = findViewById<EditText>(R.id.etShowNumber)
+        if (isNewOp==true){
+            entryData.setText("")
+        }
+        isNewOp = false
+
         val buSelect = view as Button
         var buClickValue: String = entryData.text.toString()
+
 
         when (buSelect.id) {
             R.id.bu0 -> buClickValue += "0"
@@ -32,26 +38,72 @@ class MainActivity : AppCompatActivity() {
         }
         entryData.setText(buClickValue)
 
+
     }
 
+    var op = "*"
+    var oldNumber = ""
+    var isNewOp = true
     fun buOperationEvent(view:View){
         val entryData = findViewById<EditText>(R.id.etShowNumber)
         val buSelect = view as Button
         var buClickValue:String = entryData.text.toString()
         when(buSelect.id){
             R.id.buMulti -> {
+                op = "*"
 
             }
             R.id.buAdd -> {
+                op = "+"
 
 
             }
             R.id.buDiv ->{
+                op = "/"
 
             }
-            R.id.
+            R.id.buMinus ->{
+                op = "-"
+
+            }
+
 
         }
+        oldNumber= entryData.text.toString()
+        isNewOp=true
+    }
+    fun buEqaulEvent(view:View){
+        val entryData = findViewById<EditText>(R.id.etShowNumber)
+        var newNumber = entryData.text.toString()
+        var findNumber:Double?=null
+        when(op){
+            "*" ->{
+                findNumber = oldNumber.toDouble() *newNumber.toDouble()
+            }
+            "/" ->{
+                findNumber = oldNumber.toDouble() /newNumber.toDouble()
+            }
+            "+" ->{
+                findNumber = oldNumber.toDouble() +newNumber.toDouble()
+            }
+            "-" ->{
+                findNumber = oldNumber.toDouble() -newNumber.toDouble()
+            }
+
+        }
+        entryData.setText(findNumber.toString())
+        isNewOp = true
+
+    }
+    fun buClearEvent(view:View){
+        var entryData = findViewById<EditText>(R.id.etShowNumber)
+        entryData.setText("0")
+        isNewOp = true
     }
 
+    fun buParsentEvent(view:View){
+        var entryDara = findViewById<EditText>(R.id.etShowNumber)
+        var number:Double = entryDara.text.toString().toDouble()/100
+        entryDara.setText(number.toString())
+    }
 }
